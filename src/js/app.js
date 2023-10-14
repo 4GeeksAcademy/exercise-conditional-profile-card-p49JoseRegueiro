@@ -28,6 +28,21 @@ function render(variables = {}) {
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
+  if (variables.name === null) {
+    variables.name = "Carlos";
+  }
+  if (variables.lastName === null) {
+    variables.lastName = "Valderrama";
+  }
+  if (variables.role === null) {
+    variables.role = "El mejor jugador de su generacion";
+  }
+  if (variables.country === null) {
+    variables.country = "Colombia";
+  }
+  if (variables.city === null) {
+    variables.city = "Magdalena";
+  }
 
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
@@ -37,10 +52,14 @@ function render(variables = {}) {
           <h2>${variables.role}</h2>
           <h3>${variables.city}, ${variables.country}</h3>
           <ul class="${variables.socialMediaPosition}">
-            <li><a href="https://twitter.com/${variables.twitter}"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/${variables.github}"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/in/${variables.linkedin}/"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/${variables.instagram}"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://twitter.com/${variables.twitter ||
+              "PibeValderramaP"} "><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://github.com/${variables.github ||
+              "carlosvv"}"><i class="fab fa-github"></i></a></li>
+            <li><a href="https://linkedin.com/in/${variables.linkedin ||
+              "cavalderrama"}/"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="https://instagram.com/${variables.instagram ||
+              "pibevalderramap"}"><i class="fab fa-instagram"></i></a></li>
           </ul>
         </div>
     `;
@@ -52,6 +71,7 @@ function render(variables = {}) {
 window.onload = function() {
   window.variables = {
     // if includeCover is true the algorithm should show the cover image
+    // if includeCover is true the algorithm should show the cover image
     includeCover: true,
     // this is the image's url that will be used as a background for the profile cover
     background:
@@ -62,15 +82,15 @@ window.onload = function() {
     // social media bar position (left or right)
     socialMediaPosition: "position-left",
     // social media usernames
-    twitter: "PibeValderramaP",
-    github: "carlosvv",
-    linkedin: "cavalderrama",
-    instagram: "pibevalderramap",
-    name: "Carlos",
-    lastName: "Valderrama",
-    role: "El mejor jugador de su generacion",
-    country: "Colombia",
-    city: "Magdalena"
+    twitter: null,
+    github: null,
+    linkedin: null,
+    instagram: null,
+    name: null,
+    lastName: null,
+    role: null,
+    country: null,
+    city: null
   };
   render(window.variables); // render the card for the first time
 
